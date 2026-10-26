@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "hermesagent-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

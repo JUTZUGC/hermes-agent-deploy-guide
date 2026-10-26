@@ -1,0 +1,109 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "hermesagent",
+    "nameCn": "Hermes Agent",
+    "repoName": "hermes-agent-deploy-guide",
+    "oneLiner": "自托管、跨会话积累记忆的 AI Agent",
+    "officialRepo": "https://github.com/NousResearch/hermes-agent",
+    "officialDocs": "https://hermes-agent.nousresearch.com/docs/zh-Hans/getting-started/installation",
+    "stars": "257.4k",
+    "license": "MIT",
+    "highlights": [
+      "记忆：本地 Markdown，跨会话、跨模型保留",
+      "工具：47 个内置工具（搜索、浏览器、代码、视觉、图像、TTS 等）",
+      "定时：内置 cron，离线也能跑任务",
+      "入口：CLI / TUI / Gateway / Web Dashboard / 消息平台",
+      "运行：本地、Docker、SSH、Daytona、Modal 等后端",
+      "MCP：既接外部 MCP，也能把自己暴露成 MCP server"
+    ],
+    "mcpSupport": "Hermes 既支持接入外部 MCP server，也能把自己暴露成 MCP server 给 Claude Code / Cursor / Codex 调用。本仓库的 MCP 只提供安装、配置与常见坑。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-27",
+    "verification": [
+      [
+        "官方 README 的安装命令、gateway 端口与 Docker 用法已核对",
+        "已核对 2026-10-27"
+      ],
+      [
+        "Release v0.22.5 已核对（无二进制资产，安装走官方域名脚本）",
+        "已核对 2026-10-27"
+      ],
+      [
+        "未安装（安装会写入用户目录并拉取多个运行时）",
+        "已核对 2026-10-27"
+      ],
+      [
+        "MCP 服务握手与工具列表（initialize / tools/list）",
+        "已验证 2026-10-27"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-27"
+      ]
+    ],
+    "deploy": {
+      "type": "script",
+      "steps": [
+        "command -v curl >/dev/null 2>&1 || { echo \"需要先安装 curl\"; exit 1; }",
+        "curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash",
+        "export PATH=\"$HOME/.local/bin:$PATH\"",
+        "command -v hermes >/dev/null 2>&1 || { echo \"安装后没找到 hermes，请重开终端或检查 PATH\"; exit 1; }",
+        "hermes --help"
+      ],
+      "stepsPs": [
+        "iex (irm https://hermes-agent.nousresearch.com/install.ps1)",
+        "$env:Path = \"$env:LOCALAPPDATA\\hermes\\bin;$env:Path\" ; hermes --help",
+        "Write-Host '安装完成：运行 hermes setup 配置模型与消息平台，再输入 hermes 开始对话'"
+      ],
+      "source": "https://github.com/NousResearch/hermes-agent#quick-install"
+    },
+    "pitfalls": [
+      "PowerShell 执行策略拦截：先 `Set-ExecutionPolicy -Scope Process Bypass`",
+      "命令找不到：重开终端，确认 `~/.local/bin` 或 `%LOCALAPPDATA%\\hermes\\bin` 在 PATH 里",
+      "杀软删了 uv.exe：按官方 README 校验后把 bin 目录加白名单",
+      "gateway 连不上：检查 8642 端口与 `hermes doctor` 输出",
+      "模型不响应：先 `hermes model` 确认 provider 与 Key",
+      "升级后异常：跑 `hermes update`，再 `hermes doctor`",
+      "Docker 写入失败：挂载的 `~/.hermes` 要可写"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/hermes-agent-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/hermes-agent-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Hermes Agent 部署",
+    "Hermes Agent 安装教程",
+    "自托管 AI Agent",
+    "Agent 长期记忆",
+    "AI Agent 定时任务",
+    "Hermes 中文",
+    "Nous Research Agent",
+    "Agent MCP 服务端",
+    "开源 Agent 框架",
+    "hermes agent deploy guide"
+  ],
+  "topics": [
+    "ai-agents",
+    "self-hosted",
+    "mcp",
+    "python",
+    "telegram-bot",
+    "automation"
+  ]
+}
